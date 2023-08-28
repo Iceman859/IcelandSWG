@@ -111,9 +111,9 @@ class VisibilityManager : public Singleton<VisibilityManager>, public Logger, pu
 public:
 
 	enum { // default visibility modifiers if value does not exist in LUA
-		SABERVISMOD = 10, // equipping saber cost
-		COMBATVISMOD = 25, // Combat action or force power cost
-		BUFFVISMOD = 10 // jedi self buff cost
+		SABERVISMOD = 50, // equipping saber cost Default: 10
+		COMBATVISMOD = 25, // Combat action or force power cost Default: 25
+		BUFFVISMOD = 5 // jedi self buff cost Default: 10
 	};
 
 	/**
