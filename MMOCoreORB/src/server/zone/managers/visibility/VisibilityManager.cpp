@@ -56,20 +56,21 @@ float VisibilityManager::calculateVisibilityIncrease(CreatureObject* creature) {
 			if (group != nullptr && group->hasMember(c))
 				continue;
 		}
-
+				//IcelandSWG Explanation: If you whip out your lightsaber, perform a combat or force cost action or self buff within 32m 
 		if (!creature->isInRange(c, 32) || !CollisionManager::checkLineOfSight(creature, c))
 			continue;
-
+				//IcelandSWG Explanation: If the player or non animal creature within range sees you and they are Neutral full modifier applies.
 		if (creature->getFaction() == 0 || (c->getFaction() != factionImperial && c->getFaction() != factionRebel)) {
-			visibilityIncrease += 0.5;
-			//info(c->getCreatureName().toString() + " generating a 0.5 visibility modifier", true);
+			visibilityIncrease += 1; //default: 0.50
+
 		} else {
+			//IcelandSWG Explanation: If the player or non animal creature within range sees you and they are the same faction as you half of the modifier applies.
 			if (creature->getFaction() == c->getFaction()) {
-				visibilityIncrease += 0.25;
-				//info(c->getCreatureName().toString() + " generating a 0.25 visibility modifier", true);
+				visibilityIncrease += 0.50; //default: 0.25
+
 			} else {
-				visibilityIncrease += 1;
-				//info( c->getCreatureName().toString() + " generating a 1.0 visibility modifier", true);
+				//IcelandSWG Explanation: If the player or non animal creature within range sees you and they are the opposite faction as you the double modifier applies.
+				visibilityIncrease += 2; //default: 1
 			}
 		}
 
