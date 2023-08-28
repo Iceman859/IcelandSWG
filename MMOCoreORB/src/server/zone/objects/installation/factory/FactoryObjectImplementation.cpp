@@ -13,9 +13,9 @@
 #include "server/zone/ZoneClientSession.h"
 #include "server/chat/ChatManager.h"
 #include "server/zone/packets/factory/FactoryCrateObjectDeltaMessage3.h"
-#include "server/zone/managers/object/ObjectManager.h"
 #include "server/zone/packets/scene/SceneObjectCreateMessage.h"
 #include "server/zone/packets/scene/ClientOpenContainerMessage.h"
+#include "server/zone/managers/object/ObjectManager.h"
 
 #include "server/zone/objects/player/PlayerObject.h"
 #include "server/zone/objects/player/sui/listbox/SuiListBox.h"
@@ -68,8 +68,8 @@ void FactoryObjectImplementation::notifyLoadFromDatabase() {
 
 		inputHopper->registerObserver(ObserverEventType::OPENCONTAINER, hopperObserver);
 		inputHopper->registerObserver(ObserverEventType::CLOSECONTAINER, hopperObserver);
-		inputHopper->setContainerDefaultDenyPermission(ContainerPermissions::MOVECONTAINER);
 
+		inputHopper->setContainerDefaultDenyPermission(ContainerPermissions::MOVECONTAINER);
 	}
 
 	if (outputHopper != nullptr) {
@@ -295,9 +295,9 @@ void FactoryObjectImplementation::sendIngredientHopper(CreatureObject* player) {
 		return;
 	}
 
-	#ifdef DEBUG_FACTORIES
-		info(true) << "sendIngredientHopper - Player: " << player->getFirstName();
-	#endif
+#ifdef DEBUG_FACTORIES
+	info(true) << "sendIngredientHopper - Player: " << player->getFirstName();
+#endif
 
 	inputHopper->sendWithoutContainerObjectsTo(player);
 	inputHopper->openContainerTo(player);
@@ -311,9 +311,9 @@ void FactoryObjectImplementation::sendOutputHopper(CreatureObject* player) {
 		return;
 	}
 
-	#ifdef DEBUG_FACTORIES
-		info(true) << "sendOutputHopper - Player: " << player->getFirstName();
-	#endif
+#ifdef DEBUG_FACTORIES
+	info(true) << "sendOutputHopper - Player: " << player->getFirstName();
+#endif
 
 	outputHopper->sendWithoutContainerObjectsTo(player);
 
@@ -353,18 +353,18 @@ void FactoryObjectImplementation::openHopper(Observable* observable, ManagedObje
 		return;
 
 #ifdef DEBUG_FACTORIES
-		info(true) << "openHopper - Player: " << player->getFirstName();
+	info(true) << "openHopper - Player: " << player->getFirstName();
 #endif
 
-		Locker clock(player, _this.getReferenceUnsafeStaticCast());
+	Locker clock(player, _this.getReferenceUnsafeStaticCast());
 
-		addOperator(player);
+	addOperator(player);
 }
 
 void FactoryObjectImplementation::closeHopper(Observable* observable, ManagedObject* arg1) {
-	#ifdef DEBUG_FACTORIES
-		info(true) << "closeHopper";
-	#endif
+#ifdef DEBUG_FACTORIES
+	info(true) << "closeHopper";
+#endif
 
 	ManagedReference<CreatureObject*> player = cast<CreatureObject*>(arg1);
 	ManagedReference<SceneObject*> hopper = cast<SceneObject*>(observable);
@@ -373,7 +373,7 @@ void FactoryObjectImplementation::closeHopper(Observable* observable, ManagedObj
 		return;
 
 #ifdef DEBUG_FACTORIES
-			info(true) << "closeHopper - Player: " << player->getFirstName();
+	info(true) << "closeHopper - Player: " << player->getFirstName();
 #endif
 
 	FactoryObject* thisFactory = _this.getReferenceUnsafeStaticCast();
@@ -392,15 +392,15 @@ void FactoryObjectImplementation::closeHopper(Observable* observable, ManagedObj
 		item->sendDestroyTo(player);
 	}
 
-	#ifdef DEBUG_FACTORIES
-			info(true) << "closeHopper - Hopper sending destroy.";
-	#endif
+#ifdef DEBUG_FACTORIES
+		info(true) << "closeHopper - Hopper sending destroy.";
+#endif
 
-		hopper->sendDestroyTo(player);*/
+	hopper->sendDestroyTo(player);*/
 
-		Locker clock(player, thisFactory);
+	Locker clock(player, thisFactory);
 
-		removeOperator(player);
+	removeOperator(player);
 }
 
 void FactoryObjectImplementation::handleInsertFactorySchem(CreatureObject* player, ManufactureSchematic* schematic) {
@@ -566,7 +566,7 @@ bool FactoryObjectImplementation::startFactory() {
 	timer = 30;
 	info(true) << "Factory Testing Timer Set To: " << timer;
 #else
-	timer = ((int)schematic->getComplexity()) * 4;
+	timer = ((int)schematic->getComplexity()) * 8;
 #endif
 
 	if (!populateSchematicBlueprint(schematic))
@@ -654,7 +654,6 @@ void FactoryObjectImplementation::stopFactory(String& type, String& displayedNam
 
 void FactoryObjectImplementation::createNewObject() {
 	/// Pre: _this.getReferenceUnsafeStaticCast() locked
-
 
 #ifdef DEBUG_FACTORIES
 	info(true) << "createNewObject - called";

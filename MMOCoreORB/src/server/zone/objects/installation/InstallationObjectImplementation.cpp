@@ -84,7 +84,7 @@ void InstallationObjectImplementation::fillAttributeList(AttributeListMessage* a
 }
 
 void InstallationObjectImplementation::setActive(bool value, bool notifyClient) {
-	//updateInstallationWork();
+	// updateInstallationWork();
 
 	if (active == value)
 		return;
@@ -95,7 +95,7 @@ void InstallationObjectImplementation::setActive(bool value, bool notifyClient) 
 
 		spawnDensity = currentSpawn->getDensityAt(getZone()->getZoneName(), getPositionX(), getPositionY());
 
-		if(spawnDensity < .10) {
+		if (spawnDensity < .10) {
 			return;
 		}
 

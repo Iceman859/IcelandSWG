@@ -78,7 +78,6 @@ int HarvesterObjectImplementation::handleObjectMenuSelect(CreatureObject* player
 }
 
 String HarvesterObjectImplementation::getRedeedMessage() {
-
 	if (isActive())
 		return "destroy_deactivate_first";
 

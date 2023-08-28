@@ -113,7 +113,6 @@ class InstallationObject extends StructureObject {
 
 	@dirty
 	public abstract void updateOperators() {
-
 	}
 
 	@preLocked
