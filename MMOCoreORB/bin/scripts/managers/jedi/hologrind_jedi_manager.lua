@@ -50,7 +50,6 @@ function HologrindJediManager:getGrindableProfessionList()
 		{ "crafting_tailor_master", 		CRAFTING_TAILOR_MASTER  },		--30
 		{ "crafting_weaponsmith_master", 	CRAFTING_WEAPONSMITH_MASTER  },		--31
 		{ "combat_unarmed_master", 		COMBAT_UNARMED_MASTER  },		--32
-		{ "social_politician_master", 	SOCIAL_POLITICIAN_MASTER  }, --33
 	}
 	return grindableProfessions
 end
